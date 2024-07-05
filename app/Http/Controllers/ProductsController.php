@@ -79,29 +79,19 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $ids = $request->pro_id;
-        $request->validate([
-            'Product_name' => ['required','max:50',Rule::unique('products')->ignore($ids)],
-            'section_name' => 'required',
-        ],[
-            'Product_name.required' =>'يرجى إدخال اسم المنتج',
-            'section_name.required' =>'يرجى اختيار اسم القسم',
-            'Product_name.max' =>'اسم المنتج اكبر من 50 حرف ',
-            'Product_name.unique' =>'اسم المنتج مسجل مسبقاً',
+        $validator = $request->validate([
+            'product_name' => 'nullable',
+            'section_name' => 'nullable',
+            'description' => 'nullable',
         ]);
-
-
-        $id = sections::where('section_name', $request->section_name)->first()->id;
-
-        $Products = Products::findorFail($ids);
-        // return $Products;
- 
-        $Products->update([
-        'product_name' => $request->Product_name,
-        'desciption' => $request->description,
-        'section_id' => $id,
+        $section_id = sections::where('section_name', $request->section_name)->first();
+        $Product = Products::where('id',$request->pro_id)->first();
+        $Product->update([
+            'product_name' => $request->product_name,
+            'section_id' => $section_id->id,
+            'desciption' => $request->description,
         ]);
 
 
@@ -114,8 +104,7 @@ class ProductsController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = $request->pro_id;
-        Products::findorfail($id)->delete();
+        Products::findorfail($request->pro_id)->delete();
         Session()->flash('Error', 'تم حذف المنتج بنجاح ');
         return redirect()->route('product.index');
     }
