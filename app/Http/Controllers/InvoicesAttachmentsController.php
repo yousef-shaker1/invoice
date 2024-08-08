@@ -43,7 +43,6 @@ class InvoicesAttachmentsController extends Controller
             'file_name.mimes' => 'صيغة المرفق يجب ان تكون pdf, jpeg, png, jpg',
         ]);
         $image = $request->file('file_name')->getClientOriginalName();
-        // $path = $request->file('file_name')->store($image, 'public_upload');
         $attachments = invoices_attachments::create([
             'file_name' => $image,
             'invoice_number' => $request->invoice_number,

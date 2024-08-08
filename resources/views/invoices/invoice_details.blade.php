@@ -92,9 +92,6 @@
                                                                                             data-toggle="tab">حالات
                                                                                             الدفع</a>
                                                                                     </li>
-                                                                                    <li><a href="#tab6" class="nav-link"
-                                                                                            data-toggle="tab">المرفقات</a>
-                                                                                    </li>
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
@@ -256,122 +253,7 @@
                                                                                 </div>
 
 
-                                                                                <div class="tab-pane" id="tab6">
-                                                                                    <!--المرفقات-->
-                                                                                    <div class="card card-statistics">
-                                                                                        @can('اضافة مرفق')
-                                                                                        <div class="card-body">
-                                                                                         <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
-                                                                                         <h5 class="card-title">اضافة مرفقات</h5>
-                                                                                         <form method="post" action="{{ route('atte.store') }}"
-                                                                                             enctype="multipart/form-data">
-                                                                                             @csrf
-                                                                                             <div class="custom-file">
-                                                                                                 <input type="file" class="custom-file-input" id="customFile"
-                                                                                                     name="file_name" required>
-                                                                                                 <input type="hidden" id="customFile" name="invoice_number"
-                                                                                                     value="{{ $x->invoice_number }}">
-                                                                                                 <input type="hidden" id="invoice_id" name="inv_id"
-                                                                                                     value="{{ $x->id }}">
-                                                                                                 <label class="custom-file-label" for="customFile">حدد
-                                                                                                     المرفق</label>
-                                                                                             </div><br><br>
-                                                                                             <button type="submit" class="btn btn-primary btn-sm "
-                                                                                                 name="uploadedFile">تاكيد</button>
-                                                                                         </form>
-                                                                                     </div>
-                                                                                        @endcan
-                                                                                        <br>
-
-                                                                                        <div
-                                                                                            class="table-responsive mt-15">
-                                                                                            <table
-                                                                                                class="table center-aligned-table mb-0 table table-hover"
-                                                                                                style="text-align:center">
-                                                                                                <thead>
-                                                                                                    <tr class="text-dark">
-                                                                                                        <th scope="col">
-                                                                                                            م
-                                                                                                        </th>
-                                                                                                        <th scope="col">
-                                                                                                            اسم
-                                                                                                            الملف</th>
-                                                                                                        <th scope="col">
-                                                                                                            قام
-                                                                                                            بالاضافة</th>
-                                                                                                        <th scope="col">
-                                                                                                            تاريخ الاضافة
-                                                                                                        </th>
-                                                                                                        <th scope="col">
-                                                                                                            العمليات</th>
-                                                                                                    </tr>
-                                                                                                </thead>
-                                                                                                <tbody>
-                                                                                                    <?php $i = 0; ?>
-                                                                                                    @foreach ($attachments as $atta)
-                                                                                                        <?php $i++; ?>
-                                                                                                        <tr>
-                                                                                                            <td>{{ $i }}
-                                                                                                            </td>
-                                                                                                            <td>{{ $atta->file_name }}
-                                                                                                            </td>
-                                                                                                            <td>{{ $atta->Created_by }}
-                                                                                                            </td>
-                                                                                                            <td>{{ $atta->created_at }}
-                                                                                                            </td>
-                                                                                                            <td
-                                                                                                                colspan="2">
-
-                                                                                                                <a class="btn btn-outline-success btn-sm"  
-                                                                                                                href="{{ route('view_file', ['invoice_number' => $x->invoice_number, 'file_name' => $atta->file_name]) }}"                                                                                                                  href="{{ route('view_file', ['invoice_number' => $x->invoice_number, 'file_name' => $atta->file_name]) }}"
-                                                                                                                    role="button"><i
-                                                                                                                        class="fas fa-eye"></i>&nbsp;
-                                                                                                                    عرض</a>
-
-                                                                                                                <a class="btn btn-outline-info btn-sm"
-                                                                                                                    href="{{ route('download', ['invoice_number' => $x->invoice_number, 'file_name' => $atta->file_name]) }}"
-                                                                                                                    role="button"><i
-                                                                                                                        class="fas fa-download"></i>&nbsp;
-                                                                                                                    تحميل</a>
-
-                                                                                                                @can('حذف المرفق')
-                                                                                                                <button
-                                                                                                                    class="btn btn-outline-danger btn-sm"
-                                                                                                                    data-toggle="modal"
-                                                                                                                    data-file_name="{{ $atta->file_name }}"
-                                                                                                                    data-invoice_number="{{ $atta->invoice_number }}"
-                                                                                                                    data-id_file="{{ $atta->id }}"
-                                                                                                                    data-target="#delete_file">حذف</button>
-                                                                                                                @endcan
-
-                                                                                                            </td>
-                                                                                                        </tr>
-                                                                                                    @endforeach
-                                                                                                </tbody>
-                                                                                                </tbody>
-                                                                                            </table>
-
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /div -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            {{-- </div>
-                            <!-- row closed -->
-                        </div> --}}
+                                                                                
                         <div class="modal fade" id="delete_file" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

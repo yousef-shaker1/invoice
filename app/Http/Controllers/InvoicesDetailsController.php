@@ -85,21 +85,9 @@ class InvoicesDetailsController extends Controller
         $sections = sections::all();
         return view('invoices.invoice_details', compact('invoices', 'sections','details','attachments'));
     }
-    public function open_file($invoice_number, $file_name){
-        $files = Storage::disk('public_upload')->path($invoice_number . '/' . $file_name);
-        return response()->file($files);
-    }
-    
-    public function get_file($invoice_number, $file_name){
 
-        $files = Storage::disk('public_upload')->path($invoice_number . '/' . $file_name);
-        return response()->download($files); 
-        // $contents= Storage::disk('public_upload')->getDriver()->getAdapter()->applyPathPrefix($invoice_number.'/'.$file_name);
-        // return response()->download( $contents);
-    }
 
     public function details_not($id){
-        // $not_id = DB::table('notifications')->where('data->id' , $id)->where('notifiable_id', Auth::user()->id)->pluck('id');
-        // DB::table('notifications')->where('id', $not_id)->update(['read_at' => '2024-05-10 03:28:49']);
+        //
     }
 }

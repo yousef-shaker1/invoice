@@ -116,11 +116,8 @@
 						</div>
 					</div><!-- COL-END -->
 				</div>
-				<!-- row closed -->
 			</div>
-			<!-- Container closed -->
 		</div>
-		<!-- main-content closed -->
 @endsection
 @section('js')
 <!--Internal  Chart.bundle js -->
